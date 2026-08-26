@@ -1,7 +1,6 @@
 import requests
 from dotenv import load_dotenv
 import os
-import unicodedata
 
 def configure():
     load_dotenv()
@@ -11,7 +10,6 @@ load_dotenv()
 base_url =  "https://api.le-systeme-solaire.net/rest"
 headers = {"Authorization": f"Bearer {os.getenv('chave_api')}"}
 
-
 class Planet:
     def __init__(self,data):
         self.nome = data["englishName"]
@@ -19,6 +17,8 @@ class Planet:
         self.raio = data["equaRadius"]
         self.tipo = data["bodyType"]
         self.luas = data.get("moons") or []
+        self.temp = data["avgTemp"]
+        self.distancia_sol = data["semimajorAxis"]
 
         dados_massa = data["mass"]
         self.massa = (dados_massa["massValue"] * (10 ** dados_massa["massExponent"]))
@@ -28,10 +28,12 @@ class Planet:
     def show_info(self):
             print("*" * 50)
             print(f"Nome do Astro: {self.nome}")
-            print(f"Gravidade do Astro é: {self.gravidade:.2f}m/s²")
-            print(f"A Massa do Astro é de: {self.massa:.3e}kg")
-            print(f"O Volume do Astro é de: {self.volume:.3e}km³")
-            print(f"O Raio Equatorial do Astro é de: {self.raio:.2f}km")
+            print(f"Gravidade do Astro '{self.nome}' é: {self.gravidade:.2f}m/s²")
+            print(f"A Massa do Astro '{self.nome}' é de: {self.massa:.3e}kg")
+            print(f"O Volume do Astro '{self.nome}' é de: {self.volume:.3e}km³")
+            print(f"O Raio Equatorial do Astro '{self.nome}' é de: {self.raio:.2f}km")
+            print(f"A temperatura do Astro '{self.nome}' é de: {self.temp} K")
+            print(f"A Distância do Sol e '{self.nome}' é de {self.calculo_UA():.2f} AU")
             print(f"O Astro é um(a): {self.tipo}")
 
             if self.luas:
@@ -58,6 +60,10 @@ class Planet:
         g_calculada_ms2 = GRAVIDADE_TERRA * razao_massa * (razao_raio ** 2)
         g_calculada_Gs = (self.massa / MASSA_TERRA) * ((RAIO_TERRA / self.raio) ** 2)
         return g_calculada_ms2, g_calculada_Gs
+
+    def calculo_UA(self):
+       distancia_UA = self.distancia_sol / 149597870
+       return distancia_UA
 
 def get_planet(name):
     url = (f"{base_url}/bodies/{name}")
@@ -107,4 +113,4 @@ while True:
         print("-" * 50)
     else:
         print(f"❌ ERRO: Não foi Possivel Encontrar o Planeta {planeta_escolhido}. Certifique-se de Digitar O Nome Correto!")
-
+  
