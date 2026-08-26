@@ -20,8 +20,8 @@ Programa em Python que consulta dados reais de planetas e outros corpos celestes
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/angeLoon77/SEU-REPOSITORIO.git
-   cd SEU-REPOSITORIO
+   git clone https://github.com/angeLoon77/api-dados-astronomicos.git
+   cd api-dados-astronomicos
    ```
 
 2. Crie e ative um ambiente virtual:
@@ -41,7 +41,7 @@ Programa em Python que consulta dados reais de planetas e outros corpos celestes
 
 5. Rode o programa:
    ```bash
-   python nome_do_arquivo.py
+   python space_api.py
    ```
 
 ## Como usar
@@ -69,7 +69,7 @@ Gravidade do Astro 'Mars' é: 3.71m/s²
 
 - Interface via terminal apenas — sem interface gráfica
 - Nomes de planetas fora da lista de tradução pt-BR (`planetas_ptbr`) precisam ser digitados em inglês
-- Ideia original era integrar este projeto com uma simulação de gravidade (usando os dados reais dos planetas para simular órbitas), mas os dois projetos foram mantidos separados por enquanto
+- Ideia original era integrar este projeto com meu projeto de simulação de gravidade (usando os dados reais dos planetas para simular órbitas), mas os dois projetos foram mantidos separados por enquanto
 
 ## Sobre o projeto
 
