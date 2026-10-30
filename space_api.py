@@ -77,7 +77,7 @@ def get_planet(name):
         return resposta.json()
     
     except requests.exceptions.RequestException as erro:
-        (f"Falha ao Acessar Dados Astronômicos {erro}")
+        print(f"Falha ao Acessar Dados Astronômicos {erro}")
         return None
 
 print("*" * 50)
